@@ -19,6 +19,8 @@ namespace PhotoSharingApp
             string containerName = "photos";
 
             BlobContainerClient container = new BlobContainerClient(connectionString, containerName);
+
+            container.CreateIfNotExists();
         }
     }
 }
