@@ -21,6 +21,17 @@ namespace PhotoSharingApp
             BlobContainerClient container = new BlobContainerClient(connectionString, containerName);
 
             container.CreateIfNotExists();
+
+            string blobName = "docs-and-friends-selfie-stick";
+            string fileName = "docs-and-friends-selfie-stick.png";
+            BlobClient blobClient = container.GetBlobClient(blobName);
+            blobClient.Upload(fileName, true);
+
+            var blobs = container.GetBlobs();
+            foreach (var blob in blobs)
+            {
+                Console.WriteLine($"{blob.Name} --> Created On: {blob.Properties.CreatedOn:yyyy-MM-dd HH:mm:ss}  Size: {blob.Properties.ContentLength}");
+            }
         }
     }
 }
